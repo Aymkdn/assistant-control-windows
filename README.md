@@ -2,6 +2,8 @@
 
 Ce plugin de [`assistant-plugins`](https://aymkdn.github.io/assistant-plugins/) permet de contrôler l'ordinateur Windows sur lequel [`assistant-plugins`](https://aymkdn.github.io/assistant-plugins/) est installé.
 
+Idée originale de [ABOATDev](https://github.com/ABOATDev/).
+
 ## Installation
 
 Si vous n'avez pas installé [`assistant-plugins`](https://aymkdn.github.io/assistant-plugins/), alors il faut le faire, et sélectionner **control-windows** comme plugin.
@@ -43,12 +45,11 @@ Voici les actions possibles :
     - De `a` à `z`, de `0` à `9`
     - De `F1` à `F24` (pour les touches spéciales)
     - Les touches `shift`, `ctrl`, `alt`, `enter`, `esc`, `leftshift`, `rightshift`, `leftctrl`, `rightctrl`, `leftmenu`, `rightmenu`, `spc` (pour la touche espace), `down`, `up`, `left`, `right`, `home`, `end`, `insert`, `delete`, `plus`, `comma`, `minus`, `period`, `lwin`, `rwin` (pour la touche Windows), `apps`, `pageup`, `pagedown`, `tab`, `multiply`, `add`, `subtract`, `seperator`, `divide`, `backspace`, `pause`, `capslock`, `numlock`, `scroll`, `printscreen`  
-  Par exemple pour mettre en pause une vidéo qui est lue en plein écran on utilise la barre d'espace ; du coup on pourra utiliser la commande `control-windows_key spc`  
   - **'cmd X'** : il est possible d'exécuter toutes les commandes fournies par [http://nircmd.nirsoft.net/](http://nircmd.nirsoft.net/)... Voici quelques exemples :  
     - Pour [verrouiller la session de Windows](http://nircmd.nirsoft.net/lockws.html) : `control-windows_cmd lockws`  
     - Pour [ouvrir le lecteur CD de l'ordinateur](http://nircmd.nirsoft.net/cdrom.html) : `control-windows_cmd cdrom open K:` (si le lecteur CD est sur la lettre K)  
     - Fermer le programme actif (on utilise alt+F4) : `control-windows_key alt+F4`  
     - Activer [l'écran de veille](http://nircmd.nirsoft.net/screensaver.html) : `control-windows_screensaver`
     - Pour [lancer Google Chrome](http://nircmd.nirsoft.net/exec.html) : `control-windows_cmd exec max "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"`
-    
-Idée originale de [ABOATDev](https://github.com/ABOATDev/).
+    - Pour mettre en pause une vidéo qui est lue en plein écran on utilise la barre d'espace ; du coup `control-windows_key spc` permet de mettre en pause / remettre en lecture une vidéo  
+
