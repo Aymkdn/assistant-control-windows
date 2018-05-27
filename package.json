@@ -1,0 +1,12 @@
+{
+  "name": "assistant-control-windows",
+  "version": "1.0.0",
+  "description": "Permet de contrôler un ordinateur sous Windows",
+  "author": "aymkdn",
+  "main": "control-windows.js",
+  "repository": "https://github.com/Aymkdn/assistant-control-windows/",
+  "license": "MIT",
+  "dependencies": {
+    "win-audio": "^1.2.0"
+  }
+}
