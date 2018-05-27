@@ -22,7 +22,7 @@ Il faut créer une applet IFTTT pour chacune des actions souhaitées. On va comm
   1. Créer une nouvelle *applet* dans IFTTT : [https://ifttt.com/create](https://ifttt.com/create)  
   2. Cliquer sur **this** puis choisir **Google Assistant**  
   3. Choisir la carte **Say a simple phrase** (ou autre, selon votre cas)  
-  4. Dans *« What do you want to say? »* mettre la phrase qui va déclencher l'action (par exemple : *baisse le volume du PC*)  
+  4. Dans *« What do you want to say? »* mettre la phrase qui va déclencher l'action (par exemple : *baisse le volume du PC*, ou *ouvre le navigateur*, ou *ouvre le lecteur CD*, etc...)  
   5. Remplir les autres champs de la carte  
   6. Maintenant, cliquer sur **that** puis choisir **Pushbullet**  
   7. Choisir la carte **Push a Note**  
