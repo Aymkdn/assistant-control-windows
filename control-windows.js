@@ -1,5 +1,3 @@
-var request = require('request-promise-native'); // si vous souhaitez faire des requêtes HTTP
-
 /**
  * on crée une fonction `AssistantControlWindows`
  * @param {Object} configuration L'objet `configuration` qui vient du fichier configuration.json
@@ -32,29 +30,69 @@ AssistantControlWindows.prototype.action = function(commande) {
   // on regarde le premier mot clé
   var action = commande.split(' ')[0];
   var params = commande.split(' ').slice(1).join(' ');
-  var exec = require('child_process').exec;
-  var nircmd = './bin/nircmd.exe';
+  var _this = this;
   return new Promise(function(prom_res, prom_rej) {
     switch(action) {
-      case 'sound_down': // si on souhaite baisser le son
-      case 'sound_up': { // si on souhaite augmenter le son
+      case 'volume': // on fixe un volume précis, en %
+      case 'volume_down': // si on souhaite baisser le son de X %
+      case 'volume_up': { // si on souhaite augmenter le son de X %
         // 100% = 65535
         // on doit fournir le % du volume souhaitée
         var volume = params.replace(/%/,"").trim() *  65535 / 100;
-        exec(nircmd+ ' setsysvolume '+volume, {windowsHide:true}, function(error, stdout, stderr) {
-          console.log("[assistant-control-windows] Lancement du programme : "+commande);
+        if (action === 'volume_down') volume *= -1;
+        _this.nircmd((action==='volume' ? 'setsysvolume' : 'changesysvolume') + ' '+volume)
+        .then(function() {
+          console.log("[assistant-control-windows] Changement du volume de Windows.");
+          prom_res();
+        })
+        break;
+      };
+      case 'mute':
+      case 'unmute': { // pour couper/remettre le son
+        _this.nircmd('mutesysvolume '+ ('mute'?1:0))
+        .then(function() {
+          console.log("[assistant-control-windows] " + (action==='mute' ? "On coupe le son" : "On remet le son")+" de Windows.");
           prom_res();
         })
         break;
       };
       case 'key': { // si on veut envoyer une touche clavier
-        exec(nircmd+ ' sendkey '+params, {windowsHide:true}, function(error, stdout, stderr) {
-          console.log("[assistant-control-windows] Lancement du programme : "+commande);
+        _this.nircmd('sendkeypress '+params)
+        .then(function() {
+          console.log("[assistant-control-windows] Envoie de la touche '"+params+"' à Windows.");
           prom_res();
         })
         break;
+      };
+      case 'shutdown': { // pour arrêter l'ordinateur
+        _this.nircmd('exitwin poweroff')
+        .then(function() {
+          console.log("[assistant-control-windows] On arrête Windows.");
+          prom_res();
+        });
+        break;
+      };
+      case 'cmd': { // pour executer une autre commande de nircmd
+        _this.nircmd(params)
+        .then(function() {
+          console.log("[assistant-control-windows] On execute '"+params+"'");
+          prom_res();
+        });
+        break;
       }
     }
+  })
+};
+
+AssistantControlWindows.prototype.nircmd = function(args) {
+  var exec = require('child_process').exec;
+  var path = require('path');
+  var exec = require('child_process').exec;
+  var nircmd = path.join(__dirname,'bin/nircmd.exe');
+  return new Promise(function(prom_res) {
+    exec(nircmd+ ' ' +args, {windowsHide:true}, function(error, stdout, stderr) {
+      prom_res();
+    })
   })
 };
 
@@ -72,8 +110,3 @@ exports.init=function(configuration, plugins) {
     return resource;
   })
 }
-
-/**
- * À noter qu'il est également possible de sauvegarder des informations supplémentaires dans le fichier configuration.json général
- * Pour cela on appellera this.plugins.assistant.saveConfig('nom-du-plugin', {configuration_en_json_complète}); (exemple dans le plugin freebox)
- */
