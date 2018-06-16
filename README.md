@@ -51,5 +51,5 @@ Voici les actions possibles :
     - Fermer le programme actif (on utilise alt+F4) : `control-windows_key alt+F4`  
     - Activer [l'écran de veille](http://nircmd.nirsoft.net/screensaver.html) : `control-windows_screensaver`
     - Pour [lancer Google Chrome](http://nircmd.nirsoft.net/exec.html) : `control-windows_cmd exec max "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"`
-    - Pour mettre en pause une vidéo qui est lue en plein écran on utilise la barre d'espace ; du coup `control-windows_key spc` permet de mettre en pause / remettre en lecture une vidéo  
+    - Pour mettre en pause une vidéo qui est lue en premier plan on utilise la barre d'espace ; du coup `control-windows_key spc` permet de mettre en pause / remettre en lecture une vidéo  
 
