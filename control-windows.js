@@ -85,12 +85,13 @@ AssistantControlWindows.prototype.action = function(commande) {
 };
 
 AssistantControlWindows.prototype.nircmd = function(args) {
-  var exec = require('child_process').exec;
   var path = require('path');
   var exec = require('child_process').exec;
   var nircmd = path.join(__dirname,'bin/nircmd.exe');
   return new Promise(function(prom_res) {
     exec(nircmd+ ' ' +args, {windowsHide:true}, function(error, stdout, stderr) {
+      if (error) console.log("[assistant-control-windows] Erreur détectée : ",error);
+      if (stderr) console.log("[assistant-control-windows] Message d'erreur reçue : ",error);
       prom_res();
     })
   })
