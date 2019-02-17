@@ -49,7 +49,7 @@ AssistantControlWindows.prototype.action = function(commande) {
       };
       case 'mute':
       case 'unmute': { // pour couper/remettre le son
-        _this.nircmd('mutesysvolume '+ ('mute'?1:0))
+        _this.nircmd('mutesysvolume '+ (action==='mute'?1:0))
         .then(function() {
           console.log("[assistant-control-windows] " + (action==='mute' ? "On coupe le son" : "On remet le son")+" de Windows.");
           prom_res();
